@@ -30,24 +30,21 @@ const moments = [
 const momentsContainer = document.getElementById('moments');
 
 // ====== Efecto de tinta/pluma ======
-// Cada tarjeta aparece con el texto escribiéndose solo, como con pluma
 moments.forEach((m, index) => {
     const card = document.createElement('div');
     card.className = 'moment-card';
     card.innerHTML = `
         <div class="icon">${m.icon}</div>
         <h3>${m.title}</h3>
-        <p class="type-text" data-text="${m.text}"></p>
+        <p class="type-text"></p>
     `;
     momentsContainer.appendChild(card);
 
-    // Animación de escritura con pluma
     setTimeout(() => {
         typeText(card.querySelector('.type-text'), m.text);
-    }, 500 + (index * 800)); // Cada tarjeta empieza un poco después
+    }, 500 + (index * 800));
 });
 
-// Función de escritura tipo pluma
 function typeText(element, text) {
     let i = 0;
     element.textContent = '';
@@ -63,7 +60,6 @@ const btnSign = document.getElementById('btn-sign');
 const signatureInput = document.getElementById('signature-input');
 const signaturesDiv = document.getElementById('signatures');
 
-// Cargar firmas guardadas
 let signatures = JSON.parse(localStorage.getItem('signatures') || '[]');
 signatures.forEach(s => addSignature(s));
 
@@ -78,11 +74,9 @@ btnSign.addEventListener('click', () => {
     }
 });
 
-// La firma también se escribe con efecto de pluma
 function addSignature(text) {
     const item = document.createElement('div');
     item.className = 'signature-item';
-    item.textContent = '💗 ';
     signaturesDiv.appendChild(item);
     typeText(item, '💗 ' + text);
 }
@@ -108,7 +102,6 @@ document.getElementById('btn-enter').addEventListener('click', () => {
     const heartScreen = document.getElementById('screen-heart');
     const tripScreen = document.getElementById('screen-trip');
 
-    // Animación de acercamiento
     heartScreen.style.transition = 'transform 2s ease-in';
     heartScreen.style.transform = 'scale(8)';
     heartScreen.style.opacity = '0';
@@ -143,7 +136,6 @@ function spawnHearts(count, x, y) {
     }
 }
 
-// Animación de corazones flotando
 const style = document.createElement('style');
 style.textContent = `
     @keyframes float-up {
