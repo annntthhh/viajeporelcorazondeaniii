@@ -8,7 +8,7 @@ body {
     background: #0a0a0f;
     font-family: 'Georgia', serif;
     overflow-x: hidden;
-    cursor: none; /* Ocultamos el cursor normal */
+    cursor: none;
 }
 
 /* Cursor de corazón */
@@ -20,7 +20,6 @@ body {
     z-index: 9999;
     font-size: 22px;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s;
 }
 
 /* Pantallas */
@@ -34,7 +33,7 @@ body {
     display: block;
 }
 
-/* Pantalla del corazón */
+/* ====== PANTALLA 1: EL CORAZÓN REALISTA ====== */
 #screen-heart {
     display: flex;
     flex-direction: column;
@@ -43,49 +42,160 @@ body {
     text-align: center;
 }
 
-.heart-container {
+.heart-wrap {
     position: relative;
+    width: 320px;
+    height: 320px;
     animation: heartbeat 1.2s infinite;
 }
 
-#real-heart {
-    width: 350px;
-    max-width: 80vw;
-    border-radius: 20px;
-    box-shadow: 0 0 60px rgba(255, 0, 60, 0.5);
+/* Forma del corazón */
+.real-heart {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 280px;
+    background: radial-gradient(circle at 30% 25%, #ff8a9e, #e0244f 40%, #8f0f2e 80%, #5c081d);
+    border-radius: 150px 150px 0 0;
+    transform: translateX(-50%) rotate(-45deg);
+    box-shadow:
+        inset 0 -20px 40px rgba(0, 0, 0, 0.4),
+        inset 20px 0 40px rgba(255, 255, 255, 0.15),
+        0 0 50px rgba(224, 36, 79, 0.6);
+    overflow: hidden;
 }
 
-/* Palpitar del corazón */
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    14% { transform: scale(1.1); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.15); }
-    70% { transform: scale(1); }
+/* El corazón real se forma con dos círculos + un cuadrado.
+   Esta es la técnica clásica: dos círculos arriba y un cuadrado abajo */
+.real-heart::before,
+.real-heart::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: inherit;
+    border-radius: 50%;
 }
 
+.real-heart::before {
+    top: -75px;
+    left: 0;
+}
+
+.real-heart::after {
+    top: -75px;
+    right: 0;
+}
+
+/* Venitas del corazón */
+.vein {
+    position: absolute;
+    background: rgba(60, 5, 20, 0.6);
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.vein-1 {
+    width: 4px;
+    height: 90px;
+    top: 40px;
+    left: 50%;
+    transform: rotate(-10deg);
+    background: linear-gradient(to bottom, transparent, rgba(60,5,20,0.7), transparent);
+}
+
+.vein-2 {
+    width: 3px;
+    height: 70px;
+    top: 60px;
+    left: 30%;
+    transform: rotate(25deg);
+    background: linear-gradient(to bottom, transparent, rgba(60,5,20,0.6), transparent);
+}
+
+.vein-3 {
+    width: 3px;
+    height: 65px;
+    top: 55px;
+    left: 68%;
+    transform: rotate(-25deg);
+    background: linear-gradient(to bottom, transparent, rgba(60,5,20,0.6), transparent);
+}
+
+.vein-4 {
+    width: 2px;
+    height: 45px;
+    top: 100px;
+    left: 42%;
+    transform: rotate(45deg);
+    background: linear-gradient(to bottom, transparent, rgba(60,5,20,0.5), transparent);
+}
+
+/* Ramificaciones pequeñas de las venas */
+.vein-1::after,
+.vein-2::after,
+.vein-3::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: rgba(60, 5, 20, 0.4);
+    border-radius: 50%;
+}
+
+.vein-1::after { top: 30px; left: 8px; transform: rotate(40deg); }
+.vein-2::after { top: 25px; left: -6px; transform: rotate(-35deg); }
+.vein-3::after { top: 28px; left: 6px; transform: rotate(30deg); }
+
+/* Brillo del corazón */
+.heart-shine {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 50px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    transform: rotate(-30deg);
+    filter: blur(8px);
+    z-index: 6;
+}
+
+/* Resplandor exterior */
 .heart-glow {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
-    height: 100%;
+    width: 340px;
+    height: 340px;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(255, 0, 60, 0.3), transparent);
+    background: radial-gradient(circle, rgba(255, 0, 60, 0.35), transparent 70%);
     border-radius: 50%;
-    filter: blur(30px);
+    filter: blur(25px);
     animation: glow-pulse 1.2s infinite;
+    z-index: -1;
+}
+
+/* Palpitar */
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    14%  { transform: scale(1.08); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.12); }
+    70%  { transform: scale(1); }
 }
 
 @keyframes glow-pulse {
-    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 .heart-caption {
     color: #ff6b8a;
     font-size: 20px;
-    margin: 30px 0;
+    margin: 40px 0 30px;
     font-style: italic;
 }
 
@@ -104,7 +214,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Pantalla del viaje */
+/* ====== PANTALLA 2 ====== */
 .trip-title {
     text-align: center;
     color: #ff6b8a;
@@ -120,7 +230,6 @@ body {
     margin-bottom: 40px;
 }
 
-/* Contador de visitas */
 .visits {
     position: fixed;
     top: 20px;
@@ -133,7 +242,6 @@ body {
     border: 1px solid rgba(255, 0, 60, 0.3);
 }
 
-/* Galería de momentos */
 #moments {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -172,7 +280,6 @@ body {
     line-height: 1.6;
 }
 
-/* Firma */
 .signature-box {
     max-width: 600px;
     margin: 0 auto 60px;
@@ -221,7 +328,6 @@ body {
     border-bottom: 1px solid rgba(255, 0, 60, 0.1);
 }
 
-/* Botón de música */
 .music-btn {
     position: fixed;
     bottom: 20px;
