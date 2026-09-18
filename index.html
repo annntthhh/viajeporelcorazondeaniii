@@ -9,8 +9,15 @@
 <body>
     <!-- Pantalla 1: El corazón -->
     <div id="screen-heart" class="screen active">
-        <div class="heart-container">
-            <img src="corazon.jpg" alt="Corazón" id="real-heart">
+        <div class="heart-wrap">
+            <!-- Corazón realista hecho con CSS -->
+            <div class="real-heart">
+                <div class="vein vein-1"></div>
+                <div class="vein vein-2"></div>
+                <div class="vein vein-3"></div>
+                <div class="vein vein-4"></div>
+                <div class="heart-shine"></div>
+            </div>
             <div class="heart-glow"></div>
         </div>
         <p class="heart-caption">Mi corazón, para ti</p>
@@ -22,13 +29,10 @@
         <h1 class="trip-title">Viaje por el corazón</h1>
         <p class="trip-subtitle">Un recorrido por todo lo que amo de ti</p>
 
-        <!-- Contador de visitas -->
         <div class="visits" id="visit-counter">💖 Visitas: 0</div>
 
-        <!-- Galería de momentos -->
         <div id="moments"></div>
 
-        <!-- Firma de ustedes -->
         <div class="signature-box">
             <h2>Deja tu huella ✍️</h2>
             <input type="text" id="signature-input" placeholder="Escribe tu nombre o un mensaje...">
@@ -36,7 +40,6 @@
             <div id="signatures"></div>
         </div>
 
-        <!-- Música -->
         <audio id="bg-music" loop>
             <source src="tu-cancion.mp3" type="audio/mpeg">
         </audio>
