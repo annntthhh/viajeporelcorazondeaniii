@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viaje por el Corazón 💖</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- Pantalla 1: El corazón -->
+    <div id="screen-heart" class="screen active">
+        <div class="heart-container">
+            <img src="corazon.jpg" alt="Corazón" id="real-heart">
+            <div class="heart-glow"></div>
+        </div>
+        <p class="heart-caption">Mi corazón, para ti</p>
+        <button id="btn-enter">Toca para entrar 💗</button>
+    </div>
+
+    <!-- Pantalla 2: Viaje por el corazón -->
+    <div id="screen-trip" class="screen">
+        <h1 class="trip-title">Viaje por el corazón</h1>
+        <p class="trip-subtitle">Un recorrido por todo lo que amo de ti</p>
+
+        <!-- Contador de visitas -->
+        <div class="visits" id="visit-counter">💖 Visitas: 0</div>
+
+        <!-- Galería de momentos -->
+        <div id="moments"></div>
+
+        <!-- Firma de ustedes -->
+        <div class="signature-box">
+            <h2>Deja tu huella ✍️</h2>
+            <input type="text" id="signature-input" placeholder="Escribe tu nombre o un mensaje...">
+            <button id="btn-sign">Firmar</button>
+            <div id="signatures"></div>
+        </div>
+
+        <!-- Música -->
+        <audio id="bg-music" loop>
+            <source src="tu-cancion.mp3" type="audio/mpeg">
+        </audio>
+        <button id="btn-music" class="music-btn">🎵 Música</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
